@@ -14,6 +14,16 @@ module org.imem.duojava {
 
     opens org.imem.duojava to javafx.fxml;
     exports org.imem.duojava;
-    exports org.imem.duojava.task;
-    opens org.imem.duojava.task to javafx.fxml;
+    exports org.imem.duojava.Section.task;
+    opens org.imem.duojava.Section.task to javafx.fxml;
+    exports org.imem.duojava.Section;
+    opens org.imem.duojava.Section to javafx.fxml;
+    exports org.imem.duojava.Section.UI;
+    opens org.imem.duojava.Section.UI to javafx.fxml;
+    exports org.imem.duojava.Section.task.model;
+    opens org.imem.duojava.Section.task.model to javafx.fxml;
+    exports org.imem.duojava.Section.task.model.types;
+    opens org.imem.duojava.Section.task.model.types to javafx.fxml;
+    exports org.imem.duojava.Section.task.model.types.QCM;
+    opens org.imem.duojava.Section.task.model.types.QCM to javafx.fxml;
 }

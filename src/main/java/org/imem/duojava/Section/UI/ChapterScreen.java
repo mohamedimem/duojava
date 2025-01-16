@@ -1,10 +1,8 @@
-package org.imem.duojava.task;
+package org.imem.duojava.Section.UI;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.imem.duojava.task.UI.DuoTaskButton;
+import org.imem.duojava.Section.task.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,15 +1,11 @@
 
 package org.imem.duojava.Screens;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.imem.duojava.task.ChapterScreen;
-import org.imem.duojava.task.Task;
-import org.imem.duojava.task.TaskType;
+import org.imem.duojava.Section.UI.ChapterScreen;
+import org.imem.duojava.Section.task.model.Task;
+import org.imem.duojava.Section.task.model.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;

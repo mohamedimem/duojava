@@ -1,4 +1,4 @@
-package org.imem.duojava.task.UI;
+package org.imem.duojava.Section.UI;
 
 import javafx.scene.control.Button;
 

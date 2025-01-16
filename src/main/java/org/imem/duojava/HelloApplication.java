@@ -21,19 +21,6 @@ public class HelloApplication extends Application {
         navigationController.init();
 
 
-        // Initial center content
-        StackPane stackPane = new StackPane();
-        Button button = new Button("Initial Content");
-        stackPane.getChildren().add(button);
-        VBox vBox = new VBox();
-        vBox.getChildren().add(stackPane);
-
-        VBox centerVBox = new VBox();
-        centerVBox.getChildren().add(stackPane);
-        VBox.setMargin(stackPane, new Insets(20));
-        vBox.setMargin(centerVBox, new Insets(20));
-        root.borderPane.setCenter(vBox);
-
         Scene scene = new Scene(root.borderPane, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();

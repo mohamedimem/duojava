@@ -1,4 +1,6 @@
-package org.imem.duojava.task;
+package org.imem.duojava.Section;
+
+import org.imem.duojava.Section.task.model.Task;
 
 import java.util.List;
 
