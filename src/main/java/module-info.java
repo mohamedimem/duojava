@@ -14,4 +14,6 @@ module org.imem.duojava {
 
     opens org.imem.duojava to javafx.fxml;
     exports org.imem.duojava;
+    exports org.imem.duojava.task;
+    opens org.imem.duojava.task to javafx.fxml;
 }
