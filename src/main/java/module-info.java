@@ -11,6 +11,8 @@ module org.imem.duojava {
     requires eu.hansolo.tilesfx;
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
+    requires json.simple;
+    requires org.json;
 
     opens org.imem.duojava to javafx.fxml;
     exports org.imem.duojava;

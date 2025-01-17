@@ -6,6 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.imem.duojava.Constants;
+import org.imem.duojava.db.DuoDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PracticeScreen extends VBox {
 
@@ -19,13 +24,15 @@ public class PracticeScreen extends VBox {
         // Create a VBox to hold the fields
         VBox vBox = new VBox();
         vBox.setSpacing(10);
+        DuoDatabase duoDatabase= DuoDatabase.getInstance();
+        List<String> s=duoDatabase.listModules();
+List<Button> btns=new ArrayList<Button>();
+        for(String moduleName:s){
+    Button button = new Button(moduleName);
+    btns.add(button);
+}
 
-        // Add fields to the VBox
-        Label label = new Label("Enter your practice question:");
-        TextField textField = new TextField();
-        Button button = new Button("Submit");
-
-        vBox.getChildren().addAll(label, textField, button);
+        vBox.getChildren().addAll(btns);
         vBox.setPadding(new Insets(10));
         return vBox;
     }

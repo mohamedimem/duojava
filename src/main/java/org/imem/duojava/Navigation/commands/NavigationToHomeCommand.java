@@ -24,12 +24,9 @@ public class NavigationToHomeCommand implements NavigationCommand {
     @Override
     public void execute() {
         DashBoardScreen homeScreen = new DashBoardScreen();
-        borderPane.setCenter(homeScreen.getVbox());
+        borderPane.setCenter(homeScreen);
         borderPane.requestLayout();
     }
 
-    public VBox paintHome(){
-       screen = new DashBoardScreen();
-       return screen.getVbox();
-    }
+
 }

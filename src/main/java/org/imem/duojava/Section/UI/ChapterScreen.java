@@ -26,12 +26,7 @@ public class ChapterScreen {
         StackPane stackPane = new StackPane();
         VBox vbox = new VBox();
         vbox.setSpacing(20);
-        if(tasklist.size() > 0){
-            for (Task task : tasklist) {
-                DuoTaskButton button =new DuoTaskButton(task.name);
-                buttons.add(button);
-            }
-        }
+
 
         vbox.getChildren().addAll(buttons);
 

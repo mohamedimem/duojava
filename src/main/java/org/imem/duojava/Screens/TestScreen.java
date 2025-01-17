@@ -14,11 +14,11 @@ public class TestScreen extends VBox {
 
     public TestScreen() {}
     public VBox getVbox(){
-        Task task =new Task(1,"imem ", TaskType.lesson);
-        Task task2 =new Task(1,"taha ", TaskType.lesson);
+        //Task task =new Task(1,"imem ", TaskType.lesson);
+       // Task task2 =new Task(1,"taha ", TaskType.lesson);
         List<Task> taskList = new ArrayList<>();
-        taskList.add(task);
-        taskList.add(task2);
+    //    taskList.add(task);
+    //    taskList.add(task2);
         ChapterScreen chapterScreen = new ChapterScreen(taskList);
         VBox vBox = new VBox();
         vBox.setSpacing(10);

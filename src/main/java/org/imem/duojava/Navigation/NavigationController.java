@@ -3,6 +3,7 @@ package org.imem.duojava.Navigation;
 import org.imem.duojava.Navigation.UI.DuoMenuButton;
 import org.imem.duojava.Navigation.UI.DuoSideBar;
 import org.imem.duojava.Navigation.commands.*;
+import org.imem.duojava.Screens.DashBoardScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class NavigationController {
          DuoMenuButton TestItem = new DuoMenuButton(1, "Test", nTest);
          DuoMenuButton StatisticItem = new DuoMenuButton(1, "Statistics", nStat);
          List<DuoMenuButton> menus = new ArrayList<>();
+         root.borderPane.setCenter(new DashBoardScreen());
          menus.addAll(List.of(saveItem, practiceItem, QcmItem, TestItem, StatisticItem));
          DuoSideBar sideBar = new DuoSideBar(menus);
          root.borderPane.setLeft(sideBar.paint());
