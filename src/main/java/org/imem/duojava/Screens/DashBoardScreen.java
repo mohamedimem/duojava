@@ -28,6 +28,13 @@ public class DashBoardScreen extends VBox {
         this.getChildren().add(stackPane);
     }
 
+    void updateList(){
+        stackPane.getChildren().clear();
+        VBox dashboardContent = createMainContent();
+        stackPane.getChildren().add(dashboardContent);
+        stackPane.requestLayout();
+    }
+
 
 
     private VBox listModule() {
@@ -72,7 +79,7 @@ public class DashBoardScreen extends VBox {
         setMargin(vbox, new Insets(10));
         VBox.setMargin(vbox, new Insets(10));
         vbox.setStyle("-fx-background-color: #ff0000;");
-        // Add the list of modules to the dashboard
+        // Add the list of modulesstackPane.requestLayout(); to the dashboard
         HBox interactiveBtn= ComplexAddButton();
         interactiveBtn.setPadding(new Insets(10));
         vbox.getChildren().addAll(interactiveBtn,listModule());
@@ -112,8 +119,10 @@ public class DashBoardScreen extends VBox {
         Button save = new Button("Save and ADD new Module");
     ModuleController moduleController = new ModuleController();
         save.setOnAction(e -> {
-            moduleController.addModule(tf.getText(), "Default Content"); // Add your logic to save the module
+            moduleController.addModule(tf.getText()); // Add your logic to save the module
             sP.getChildren().remove(vBox); // Remove the current screen
+            //upadate the list
+            updateList();
         });
 
 

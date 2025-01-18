@@ -15,8 +15,8 @@ public class RemoveBtn extends Button {
 
         // Apply CSS styling to the button
         this.setStyle(
-                "-fx-background-color: red; " + // Set background color to red
-                        "-fx-text-fill: white; " +     // Set text color to white
+                "-fx-background-color: white; " + // Set background color to red
+                        "-fx-text-fill: red; " +     // Set text color to white
                         "-fx-font-size: 14px; " +      // Optional: Set font size
                         "-fx-padding: 2px 8px;"      // Optional: Add padding
         );

@@ -8,6 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.imem.duojava.Constants;
+import org.imem.duojava.Screens.TaskScreen.TaskScreen;
+import org.imem.duojava.Section.task.model.TaskType;
 import org.imem.duojava.db.DuoDatabase;
 
 public class DuoModuleButton {
@@ -63,44 +65,50 @@ public class DuoModuleButton {
 
     // Method to display the "Add Module" screen
     public void AddmoduleScreen() {
-        VBox vBox = new VBox();
-        vBox.setSpacing(10);
-        vBox.setStyle("-fx-background-color: #a17373;");
-
-        Label title = new Label("Create Module");
-        TextField tf = new TextField();
-
-        HBox hbox = new HBox();
-        hbox.setSpacing(10);
-        hbox.setStyle("-fx-background-color: #a17393;");
-
-        Button save = new Button("Save and ADD new Module");
-        Button exit = new Button("Save and Go Back");
-
-        save.setOnAction(e -> {
-            addModule(tf.getText(), "Default Content"); // Add your logic to save the module
-            stackPane.getChildren().remove(vBox); // Remove the current screen
-        });
-
-        exit.setOnAction(e -> {
-            stackPane.getChildren().remove(vBox); // Remove the current screen
-        });
-
-        hbox.getChildren().addAll(save, exit);
-        vBox.getChildren().addAll(title, tf, hbox);
 
         // Clear the StackPane and add the new VBox
-        stackPane.getChildren().clear(); // Clear previous content
-        stackPane.getChildren().add(vBox); // Add the new screen
+            stackPane.getChildren().clear(); // Clear previous content
+        VBox vbox = new VBox();
+        vbox.setSpacing(20);
+        vbox.getChildren().addAll(createTaskTypeButtons());
+        stackPane.getChildren().add(vbox); // Add the new screen
         stackPane.requestLayout(); // Force the StackPane to update
     }
 
-    // Method to add a module to the database
-    private void addModule(String title, String content) {
-        // Add your logic to save the module to the database
-        DuoDatabase module = DuoDatabase.getInstance();
-        module.add("title", title);
-        module.add("content", content);
-        System.out.println("Module added: " + title);
+    private StackPane layout; // StackPane to hold the dynamic content
+
+
+
+    public HBox createTaskTypeButtons() {
+        HBox hbox = new HBox();
+        hbox.setSpacing(32);
+
+        // Button for QCM
+        Button QCM = new Button(TaskType.qcm.toString());
+        QCM.setOnAction(e -> {
+            // Replace the content of the StackPane with the QCM screen
+            layout.getChildren().clear();
+            layout.getChildren().add(new TaskScreen(TaskType.qcm).paint());
+        });
+
+        // Button for Lesson
+        Button Lesson = new Button(TaskType.lesson.toString());
+        Lesson.setOnAction(e -> {
+            // Replace the content of the StackPane with the Lesson screen
+            layout.getChildren().clear();
+            layout.getChildren().add(new TaskScreen(TaskType.lesson).paint());
+        });
+
+        // Button for Todo
+        Button Todo = new Button(TaskType.todo.toString());
+        Todo.setOnAction(e -> {
+            // Replace the content of the StackPane with the Todo screen
+            layout.getChildren().clear();
+            layout.getChildren().add(new TaskScreen(TaskType.todo).paint());
+        });
+
+        // Add buttons to the HBox
+        hbox.getChildren().addAll(QCM, Lesson, Todo);
+        return hbox;
     }
 }

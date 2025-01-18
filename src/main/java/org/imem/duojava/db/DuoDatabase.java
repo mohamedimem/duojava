@@ -10,7 +10,7 @@ import org.imem.duojava.Constants;
 import org.json.*;
 import org.json.JSONObject;
 public class DuoDatabase {
-    private final Path databaseFile= Path.of(Constants.BASE_PATH); // Database file path (private)
+    private final Path baseDirectory= Path.of(Constants.BASE_PATH); // Database file path (private)
     static DuoDatabase instance;
 
     // Public method to get the single instance
@@ -22,13 +22,15 @@ public class DuoDatabase {
     }
     // Constructor to initialize the database file
     private DuoDatabase() {
-       ensureDatabaseFile();
     }
-    public void addModule(Path directory){
+    public void addModule(String moduleName) {
         try {
-            this.addDirectory(directory);
+            // Create the module directory inside the base directory
+            Path moduleDirectory = baseDirectory.resolve(moduleName);
+            Files.createDirectories(moduleDirectory); // Create the directory and any necessary parent directories
+            System.out.println("Module directory created: " + moduleDirectory);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to create module directory: " + moduleName, e);
         }
     }
     // Ensures the database file exists
@@ -37,21 +39,12 @@ public class DuoDatabase {
             Files.createDirectories(directory);
         }
     }
-    private void ensureDatabaseFile() {
-        try {
-            if (!Files.exists(databaseFile)) {
-                Files.createDirectories(databaseFile.getParent()); // Create parent directories if needed
-                Files.write(databaseFile, "{}".getBytes());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to initialize the database file.", e);
-        }
-    }
+
 
     // Reads the JSON database file and returns its content as a JSONObject
     private JSONObject readDatabase() {
         try {
-            String content = new String(Files.readAllBytes(databaseFile));
+            String content = new String(Files.readAllBytes(baseDirectory));
             return new JSONObject(content); // Parse the content into a JSONObject
         } catch (IOException e) {
             throw new RuntimeException("Failed to read from the database file.", e);
@@ -60,7 +53,7 @@ public class DuoDatabase {
 
     // Writes a JSONObject to the database file
     private void writeDatabase(JSONObject data) {
-        try (BufferedWriter writer = Files.newBufferedWriter(databaseFile)) {
+        try (BufferedWriter writer = Files.newBufferedWriter(baseDirectory)) {
             writer.write(data.toString()); // Pretty-printed JSON
         } catch (IOException e) {
             throw new RuntimeException("Failed to write to the database file.", e);
@@ -97,11 +90,11 @@ public class DuoDatabase {
 
     public List<String> listModules() {
         List<String> moduleNames = new ArrayList<>();
-        Path parentDir = Paths.get(this.databaseFile.getParent().toString());
+        Path parentDir = Paths.get(this.baseDirectory.toString());
 
         // Check if the parent directory exists
         if (!Files.exists(parentDir) || !Files.isDirectory(parentDir)) {
-            throw new RuntimeException("Parent directory not found: " + this.databaseFile.getParent().toString());
+            throw new RuntimeException("Parent directory not found: " + this.baseDirectory.getParent().toString());
         }
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(parentDir, Files::isDirectory)) {
@@ -110,18 +103,18 @@ public class DuoDatabase {
                 moduleNames.add(entry.getFileName().toString());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to list modules in directory: " + this.databaseFile.getParent().toString(), e);
+            throw new RuntimeException("Failed to list modules in directory: " + this.baseDirectory.getParent().toString(), e);
         }
 
         return moduleNames;
     }
     public List<String> listTasks( ) {
         List<String> moduleNames = new ArrayList<>();
-        Path dir = Paths.get(databaseFile.toUri());
+        Path dir = Paths.get(baseDirectory.toUri());
 
         // Check if the directory exists
         if (!Files.exists(dir) || !Files.isDirectory(dir)) {
-            throw new RuntimeException("Directory not found: " + databaseFile);
+            throw new RuntimeException("Directory not found: " + baseDirectory);
         }
 
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.json")) {
@@ -132,7 +125,7 @@ public class DuoDatabase {
                 moduleNames.add(moduleName);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to list modules in directory: " + databaseFile, e);
+            throw new RuntimeException("Failed to list modules in directory: " + baseDirectory, e);
         }
 
         return moduleNames;
